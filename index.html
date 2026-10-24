@@ -79,12 +79,12 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(-
     <div class="prize" id="prize"></div>
     <div class="code" id="code"></div>
     <div class="when" id="when"></div>
-    <ol class="steps"><li>خذ لقطة شاشة لهذه البطاقة الآن.</li><li>اضغط الزر الأخضر، وأرسل لنا اللقطة في المحادثة.</li></ol>
+    
     <label for="nm">اسمك (اختياري)</label>
     <input id="nm" type="text" autocomplete="name" placeholder="اكتب اسمك ليظهر في الرسالة">
     <a class="wa" id="wa" href="#" target="_blank" rel="noopener">أرسل هديتي على واتساب</a>
     <button class="back" id="back" type="button">رجوع لاختيار هدية أخرى</button>
-    <p class="note">سيؤكد لك فريق الحجز الموعد ويفعّل العرض بعد استلام لقطة الشاشة. هدية واحدة لكل عميل.</p>
+    <p class="note">سيتواصل معك فريق الحجز لتأكيد الموعد وتفعيل العرض. هدية واحدة لكل عميل.</p>
   </div>
 </div>
 
@@ -174,7 +174,7 @@ const nm=document.getElementById("nm"),wa=document.getElementById("wa"),sheet=do
 let cur=-1;
 function link(){
   const s=state.spins[cur],p=PRIZES[s.i],name=nm.value.trim();
-  const msg="مرحبًا Handsome & Pretty 👋\nاخترت من عجلة الهدايا: "+p.full+"\nكود الجائزة: "+s.code+(name?"\nالاسم: "+name:"")+"\nسأرسل لقطة الشاشة الآن، وأرغب في حجز موعد للاستفادة من الهدية.";
+  const msg="مرحبًا Handsome & Pretty 👋\nاخترت من عجلة الهدايا: "+p.full+"\nكود الجائزة: "+s.code+(name?"\nالاسم: "+name:"")+"\nأرغب في حجز موعد للاستفادة من الهدية.";
   wa.href="https://wa.me/"+WA_NUMBER.replace(/\D/g,"")+"?text="+encodeURIComponent(msg);
 }
 function openSheet(k){
