@@ -90,6 +90,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(-
 
 <script>
 // ===== Edit here =====
+// w:0 = shown on the wheel but can never be won
 const WA_NUMBER = "97124433221"; // WhatsApp number with country code, digits only, e.g. "9715XXXXXXXX"
 const PRIZES = [
   {l:["خصم 10%"],            full:"خصم 10% على جلستك القادمة",              w:22, bg:"#7b4fa3", fg:"#ffffff"},
@@ -97,7 +98,7 @@ const PRIZES = [
   {l:["ليزر الإبط","أو اللحية"], full:"عرض خاص على ليزر الإبط أو اللحية",       w:12, bg:"#3a3f45", fg:"#ffffff"},
   {l:["هدية","مفاجأة"],        full:"هدية مفاجأة من مركزنا",                  w:6,  bg:"#c18ae8", fg:"#2b2f34"},
   {l:["احجزوا معًا","ووفّروا"],  full:"احجزوا مع صديق ووفّروا معًا",           w:20, bg:"#f3e9fb", fg:"#2b2f34"},
-  {l:["خصم 15%"],            full:"خصم 15% على جلستك القادمة",              w:12, bg:"#9b5fc9", fg:"#ffffff"},
+  {l:["خصم 15%"],            full:"خصم 15% على جلستك القادمة",              w:0, bg:"#9b5fc9", fg:"#ffffff"},
   {l:["هيدرافيشل","أو أوكسجين"], full:"عرض خاص على الهيدرافيشل أو فيشل الأكسجين", w:12, bg:"#2b2f34", fg:"#ffffff"}
 ];
 // =====================
@@ -129,7 +130,7 @@ function load(){if(TEST)return;try{const o=JSON.parse(localStorage.getItem(KEY)|
 
 function pick(){
   const used=state.spins.map(s=>s.i);
-  const pool=PRIZES.map((p,i)=>({i,w:p.w})).filter(x=>!used.includes(x.i));
+  const pool=PRIZES.map((p,i)=>({i,w:p.w})).filter(x=>x.w>0&&!used.includes(x.i));
   let r=Math.random()*pool.reduce((t,x)=>t+x.w,0);
   for(const x of pool){r-=x.w;if(r<0)return x.i}return pool[0].i;
 }
